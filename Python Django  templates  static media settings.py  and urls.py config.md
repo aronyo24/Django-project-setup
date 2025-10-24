@@ -16,7 +16,8 @@ django-project-setup/
 │   ├── settings.py
 │   └── urls.py
 ├── static/       # Store CSS, JS, images here
-├── media/        # Store uploaded files here
+├── media/
+|__ templates     # Store uploaded files here
 
 ````
 
@@ -25,6 +26,24 @@ django-project-setup/
 ## 1️⃣ Settings in `settings.py`
 ```python
 from pathlib import Path
+
+# templates files
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -93,26 +112,3 @@ python manage.py runserver
 
 * Keep `DEBUG=True` **only in development**.
 * For production, configure `STATIC_ROOT` and serve files via a web server for performance.
-
----
-
-This configuration ensures **organized and fully functional static and media management** in Django.
-
-```
-
----
-
-You can **save this file exactly as**:  
-
-```
-
-Python Django static media settings.py config.md
-
-```
-
----
-
-If you want, I can **also create a fully professional version of `django-project-setup` repo** with this file included, **ready to clone and run**, so you don’t have to configure anything manually.  
-
-Do you want me to do that?
-```
